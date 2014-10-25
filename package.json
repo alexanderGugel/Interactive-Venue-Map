@@ -1,0 +1,16 @@
+{
+  "name": "interactive-venue-map",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "stylus -w css/map.styl",
+    "build": "stylus css/map.styl"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "stylus": "^0.49.2"
+  }
+}

@@ -5,21 +5,38 @@ var map = L.mapbox.map('map', 'alexandergugel.k21hb9dm');
 // map.setView([40, -74.50], 9);
 
 
-var markers = new L.MarkerClusterGroup();
+var markers = new L.MarkerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    return new L.divIcon({
+      iconSize: L.point(60, (function calcHeight() {
+        var rows = cluster.getChildCount();
+        if (rows % 2 !== 0) {
+          rows++;
+        }
+        rows = rows/2;
+        return (rows*29);
+      })()),
+      className: 'cluster-venue-marker',
+      html: (function () {
+        var html = '<div class="venue-marker">';
+        for (var i = 0; i < cluster.getChildCount(); i++) {
+          html += '<div class="venue"><div class="inner"></div></div>';
+        }
+        html += '</div>';
+        return html;
+      })()
+    });
+  }
+});
 
 
 
 for (var i = 0; i < 100; i++) {
   var marker = L.marker(new L.LatLng(i, i), {
-      // icon: L.mapbox.marker.icon({
-      //   'marker-symbol': 'post',
-      //   'marker-color': '0044FF'
-      // }),
-      //
       icon: L.divIcon({
         iconSize: L.point(30, 30),
-        className: 'venue-marker',
-        html: '<div class="inner"></div>'
+        className: 'single-venue-marker',
+        html: '<div class="venue-marker"><div class="venue"><div class="inner"></div></div></div>'
       }),
       title: i
   });
