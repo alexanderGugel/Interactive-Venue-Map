@@ -46,11 +46,29 @@ InteractiveVenueMap.prototype._nextClickHandler = function (event) {
 
 InteractiveVenueMap.prototype._venueToPopup = function (venue) {
   var self = this;
+
+  var header = $('<header />');
+  var h1 = $('<h1 />');
+  header.append(h1);
+
+  var main = $('<main />');
+  var description = $('<p />')
+  main.append(description);
+
   var html = $('<div />');
+  html.append(header);
+  html.append(main);
+
+  description.text(venue.description);
+  h1.text(venue.name);
+
+  header.css({
+    background: 'url(' + venue.image + ')'
+  });
 
   var venueIndex = this.venues.indexOf(venue);
 
-  var previousLink = $('<a href="#">Previous</a>').click(function (event) {
+  var previousLink = $('<a href="#" class="previous-venue">&laquo; Previous</a>').click(function (event) {
     var previousVenue = self.venues[venueIndex - 1];
     if (previousVenue) {
       self.map.setView(previousVenue._marker.getLatLng(), 30, {
@@ -60,7 +78,7 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
       previousVenue._marker.openPopup();
     }
   });
-  var nextLink = $('<a href="#">Next</a>').click(function (event) {
+  var nextLink = $('<a href="#" class="next-venue">Next &raquo;</a>').click(function (event) {
     var nextVenue = self.venues[venueIndex + 1];
     if (nextVenue) {
       self.map.setView(nextVenue._marker.getLatLng(), 30, {
@@ -71,8 +89,8 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     }
   });
 
-  html.append(previousLink);
-  html.append(nextLink);
+  main.append(previousLink);
+  main.append(nextLink);
 
   return html[0];
 };

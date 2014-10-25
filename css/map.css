@@ -18,3 +18,46 @@
   width: 24px;
   float: left;
 }
+.leaflet-popup-content {
+  padding: 0;
+}
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  width: 300px;
+}
+.leaflet-popup-content-wrapper header {
+  height: 6em;
+  position: relative;
+}
+.leaflet-popup-content-wrapper header h1 {
+  color: #fff;
+  background: rgba(0,0,0,0.8);
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5em;
+}
+.leaflet-popup-content-wrapper main {
+  padding: 0.5em 0.5em 3em;
+  position: relative;
+}
+.leaflet-popup-content-wrapper main .next-venue,
+.leaflet-popup-content-wrapper main .previous-venue {
+  position: absolute;
+  bottom: 0;
+  display: inline-block;
+  padding: 0.5em;
+}
+.leaflet-popup-content-wrapper main .next-venue {
+  right: 0;
+}
+.leaflet-popup-content-wrapper main .previous-venue {
+  left: 0;
+}
+.leaflet-popup-tip {
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #fff;
+}
