@@ -4,7 +4,6 @@ var map = L.mapbox.map('map', 'alexandergugel.k21hb9dm');
 
 // map.setView([40, -74.50], 9);
 
-
 var markers = new L.MarkerClusterGroup({
   iconCreateFunction: function (cluster) {
     return new L.divIcon({
@@ -16,7 +15,7 @@ var markers = new L.MarkerClusterGroup({
         rows = rows/2;
         return rows*26 + 4;
       })()),
-      className: 'cluster-venue-marker',
+      className: 'venue-marker',
       html: (function () {
         var html = '';
         for (var i = 0; i < cluster.getChildCount(); i++) {
@@ -28,13 +27,11 @@ var markers = new L.MarkerClusterGroup({
   }
 });
 
-
-
 for (var i = 0; i < 100; i++) {
   var marker = L.marker(new L.LatLng(i, i), {
       icon: L.divIcon({
         iconSize: L.point(30, 30),
-        className: 'single-venue-marker',
+        className: 'venue-marker',
         html: '<div class="venue"></div>'
       }),
       title: i
@@ -44,7 +41,3 @@ for (var i = 0; i < 100; i++) {
 }
 
 map.addLayer(markers);
-
-// var map = L.map('map');
-
-// L.tileLayer('https://{s}.tiles.mapbox.com/v3/alexandergugel.ijmgk566/{z}/{x}/{y}.png').addTo(map);
