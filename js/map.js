@@ -39,11 +39,47 @@ InteractiveVenueMap.prototype._initClusterGroup = function () {
   this.map.addLayer(this.venueClusterGroup);
 };
 
+InteractiveVenueMap.prototype._nextClickHandler = function (event) {
+  // TODO
+  // Clean up
+};
+
 InteractiveVenueMap.prototype._venueToPopup = function (venue) {
-  return venue.description;
+  var self = this;
+  var html = $('<div />');
+
+  var venueIndex = this.venues.indexOf(venue);
+
+  var previousLink = $('<a href="#">Previous</a>').click(function (event) {
+    var previousVenue = self.venues[venueIndex - 1];
+    if (previousVenue) {
+      self.map.setView(previousVenue._marker.getLatLng(), 30, {
+        animate: true
+      });
+      venue._marker.closePopup();
+      previousVenue._marker.openPopup();
+    }
+  });
+  var nextLink = $('<a href="#">Next</a>').click(function (event) {
+    var nextVenue = self.venues[venueIndex + 1];
+    if (nextVenue) {
+      self.map.setView(nextVenue._marker.getLatLng(), 30, {
+        animate: true
+      });
+      venue._marker.closePopup();
+      nextVenue._marker.openPopup();
+    }
+  });
+
+  html.append(previousLink);
+  html.append(nextLink);
+
+  return html[0];
 };
 
 InteractiveVenueMap.prototype.addVenues = function (venues) {
+  this.venues = venues;
+
   for (var i = 0; i < venues.length; i++) {
     var venue = venues[i];
     var marker = L.marker(new L.LatLng(venue.lat, venue.lng), {
@@ -55,12 +91,14 @@ InteractiveVenueMap.prototype.addVenues = function (venues) {
         }),
         title: venue.name
     });
-    marker.bindPopup(this._venueToPopup(venue));
+    venue._marker = marker;
+    venue.popup = marker.bindPopup(this._venueToPopup(venue));
     this.venueClusterGroup.addLayer(marker);
   }
 };
 
 InteractiveVenueMap.prototype.clearVenues = function () {
+  delete this.venues;
   InteractiveVenueMap.clearLayers();
 };
 
@@ -74,8 +112,8 @@ var venues = (function generateDummyVenues () {
       name: 'Golf Course',
       description: 'Aute incididunt officia magna tempor ad id nulla incididunt Lorem non eiusmod culpa adipisicing voluptate. Laboris veniam duis do sit ea nostrud esse ea irure in cupidatat. Irure irure cillum Lorem ex cillum anim sit exercitation eu laboris culpa proident eiusmod. Sunt proident esse exercitation mollit aliquip culpa ad. Cillum laborum ea dolore est irure laboris sit nostrud reprehenderit eu laboris tempor eiusmod incididunt. Anim mollit excepteur culpa consequat eu proident Lorem eiusmod consequat est. Commodo culpa dolor pariatur culpa proident aliqua exercitation id in commodo ut.',
       image: 'http://www.funchap.com/wp-content/uploads/2014/03/baby-elephant-and-egrets.jpg',
-      lat: Math.floor(Math.random()*50),
-      lng: Math.floor(Math.random()*50)
+      lat: Math.floor(Math.random()*10),
+      lng: Math.floor(Math.random()*10)
     });
   }
 
