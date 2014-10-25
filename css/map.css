@@ -6,36 +6,21 @@
   background: none;
   border: 0;
 }
-.venue-marker {
-  background: #fff;
+.single-venue-marker,
+.cluster-venue-marker {
   border: 1px solid #b9b9b9;
-  height: 100%;
-  width: 100%;
   padding: 1px;
-}
-.venue-marker,
-.venue-marker .venue,
-.venue-marker .inner {
-  box-sizing: border-box;
+  background: #fff;
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
 }
-.venue-marker .venue {
-  padding: 1px;
-}
-.venue-marker .venue .inner {
+.single-venue-marker .venue,
+.cluster-venue-marker .venue {
+  margin: 1px;
   background: #d8d8d8;
   border: 1px solid #b9b9b9;
-  height: 100%;
-  width: 100%;
-}
-.single-venue-marker .venue {
-  height: 100%;
-  width: 100%;
-}
-.cluster-venue-marker .venue {
-  width: 28px;
-  height: 28px;
+  height: 24px;
+  width: 24px;
   float: left;
 }

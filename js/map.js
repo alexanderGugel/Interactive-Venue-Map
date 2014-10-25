@@ -8,21 +8,20 @@ var map = L.mapbox.map('map', 'alexandergugel.k21hb9dm');
 var markers = new L.MarkerClusterGroup({
   iconCreateFunction: function (cluster) {
     return new L.divIcon({
-      iconSize: L.point(60, (function calcHeight() {
+      iconSize: L.point(56, (function calcHeight() {
         var rows = cluster.getChildCount();
         if (rows % 2 !== 0) {
           rows++;
         }
         rows = rows/2;
-        return (rows*29);
+        return rows*26 + 4;
       })()),
       className: 'cluster-venue-marker',
       html: (function () {
-        var html = '<div class="venue-marker">';
+        var html = '';
         for (var i = 0; i < cluster.getChildCount(); i++) {
-          html += '<div class="venue"><div class="inner"></div></div>';
+          html += '<div class="venue"></div>';
         }
-        html += '</div>';
         return html;
       })()
     });
@@ -36,7 +35,7 @@ for (var i = 0; i < 100; i++) {
       icon: L.divIcon({
         iconSize: L.point(30, 30),
         className: 'single-venue-marker',
-        html: '<div class="venue-marker"><div class="venue"><div class="inner"></div></div></div>'
+        html: '<div class="venue"></div>'
       }),
       title: i
   });
