@@ -78,6 +78,7 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
       previousVenue._marker.openPopup();
     }
   });
+
   var nextLink = $('<a href="#" class="next-venue">Next &raquo;</a>').click(function (event) {
     var nextVenue = self.venues[venueIndex + 1];
     if (nextVenue) {
@@ -110,7 +111,9 @@ InteractiveVenueMap.prototype.addVenues = function (venues) {
         title: venue.name
     });
     venue._marker = marker;
-    venue.popup = marker.bindPopup(this._venueToPopup(venue));
+    marker.bindPopup(this._venueToPopup(venue), {
+      closeButton: false
+    });
     this.venueClusterGroup.addLayer(marker);
   }
 };
