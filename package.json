@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "stylus -w css/map.styl",
+    "watch": "stylus -w css/map.styl & st & open http://localhost:1337/index.html",
     "build": "stylus css/map.styl"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "st": "^0.5.2",
     "stylus": "^0.49.2"
   }
 }
