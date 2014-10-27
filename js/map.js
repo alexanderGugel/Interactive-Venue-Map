@@ -41,9 +41,15 @@ InteractiveVenueMap.prototype._initClusterGroup = function () {
   this.map.addLayer(this.venueClusterGroup);
 };
 
-InteractiveVenueMap.prototype._nextClickHandler = function (event) {
-  // TODO
-  // Clean up
+InteractiveVenueMap.prototype._jumpTo = function (map, oldMarker, newMarker) {
+  if (!map || !oldMarker || !newMarker) {
+    return;
+  }
+  oldMarker.closePopup();
+  map.panTo(newMarker.getLatLng());
+  setTimeout(function () {
+    newMarker.openPopup();
+  }, 300);
 };
 
 InteractiveVenueMap.prototype._venueToPopup = function (venue) {
@@ -72,28 +78,12 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
 
   var previousLink = $('<a href="#" class="previous-venue">&laquo; Previous</a>').click(function (event) {
     var previousVenue = self.venues[venueIndex - 1];
-    if (previousVenue) {
-      venue._marker.closePopup();
-      self.map.panTo(previousVenue._marker.getLatLng(), {
-        animate: true
-      });
-      setTimeout(function () {
-        previousVenue._marker.openPopup();
-      }, 1000);
-    }
+    self._jumpTo(self.map, venue._marker, previousVenue._marker);
   });
 
   var nextLink = $('<a href="#" class="next-venue">Next &raquo;</a>').click(function (event) {
     var nextVenue = self.venues[venueIndex + 1];
-    if (nextVenue) {
-      venue._marker.closePopup();
-      self.map.panTo(nextVenue._marker.getLatLng(), {
-        animate: true
-      });
-      setTimeout(function () {
-        nextVenue._marker.openPopup();
-      }, 1000);
-    }
+    self._jumpTo(self.map, venue._marker, nextVenue._marker);
   });
 
   main.append(previousLink);
