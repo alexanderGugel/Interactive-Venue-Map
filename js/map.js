@@ -16,6 +16,7 @@ InteractiveVenueMap.prototype._initClusterGroup = function () {
   this.venueClusterGroup = new L.MarkerClusterGroup({
     disableClusteringAtZoom: 16,
     iconCreateFunction: function (cluster) {
+      console.log(cluster);
       return new L.divIcon({
         iconSize: L.point(56, (function calcHeight() {
           var rows = cluster.getChildCount();
@@ -73,11 +74,12 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     var previousVenue = self.venues[venueIndex - 1];
     if (previousVenue) {
       venue._marker.closePopup();
-      self.map.setView(previousVenue._marker.getLatLng(), 18, {
+      self.map.panTo(previousVenue._marker.getLatLng(), {
+        animate: true
       });
       setTimeout(function () {
         previousVenue._marker.openPopup();
-      }, 250);
+      }, 1000);
     }
   });
 
@@ -85,11 +87,12 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     var nextVenue = self.venues[venueIndex + 1];
     if (nextVenue) {
       venue._marker.closePopup();
-      self.map.setView(nextVenue._marker.getLatLng(), 18, {
+      self.map.panTo(nextVenue._marker.getLatLng(), {
+        animate: true
       });
       setTimeout(function () {
         nextVenue._marker.openPopup();
-      }, 250);
+      }, 1000);
     }
   });
 
@@ -113,6 +116,7 @@ InteractiveVenueMap.prototype.addVenues = function (venues) {
         }),
         title: venue.name
     });
+    marker._venue = venue;
     venue._marker = marker;
     marker.bindPopup(this._venueToPopup(venue), {
       closeButton: false
@@ -137,7 +141,9 @@ var venues = (function generateDummyVenues () {
       description: 'Aute incididunt officia magna tempor ad id nulla incididunt Lorem non eiusmod culpa adipisicing voluptate. Laboris veniam duis do sit ea nostrud esse ea irure in cupidatat. Irure irure cillum Lorem ex cillum anim sit exercitation eu laboris culpa proident eiusmod. Sunt proident esse exercitation mollit aliquip culpa ad. Cillum laborum ea dolore est irure laboris sit nostrud reprehenderit eu laboris tempor eiusmod incididunt. Anim mollit excepteur culpa consequat eu proident Lorem eiusmod consequat est. Commodo culpa dolor pariatur culpa proident aliqua exercitation id in commodo ut.',
       image: 'http://www.funchap.com/wp-content/uploads/2014/03/baby-elephant-and-egrets.jpg',
       lat: Math.floor(Math.random()*10),
-      lng: Math.floor(Math.random()*10)
+      lng: Math.floor(Math.random()*10),
+      color: 'red',
+      category: ['Athletic Venues', 'Accomandation & Events', 'Transportation'][Math.round(Math.random()*3)]
     });
   }
 
