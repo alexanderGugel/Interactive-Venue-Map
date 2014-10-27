@@ -14,7 +14,7 @@ InteractiveVenueMap.prototype._initMap = function (id, options) {
 
 InteractiveVenueMap.prototype._initClusterGroup = function () {
   this.venueClusterGroup = new L.MarkerClusterGroup({
-    // disableClusteringAtZoom: 5,
+    disableClusteringAtZoom: 16,
     iconCreateFunction: function (cluster) {
       return new L.divIcon({
         iconSize: L.point(56, (function calcHeight() {
@@ -73,8 +73,7 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     var previousVenue = self.venues[venueIndex - 1];
     if (previousVenue) {
       venue._marker.closePopup();
-      self.map.setView(previousVenue._marker.getLatLng(), 30, {
-        animate: true
+      self.map.setView(previousVenue._marker.getLatLng(), 18, {
       });
       setTimeout(function () {
         previousVenue._marker.openPopup();
@@ -86,8 +85,7 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     var nextVenue = self.venues[venueIndex + 1];
     if (nextVenue) {
       venue._marker.closePopup();
-      self.map.setView(nextVenue._marker.getLatLng(), 30, {
-        animate: true
+      self.map.setView(nextVenue._marker.getLatLng(), 18, {
       });
       setTimeout(function () {
         nextVenue._marker.openPopup();
