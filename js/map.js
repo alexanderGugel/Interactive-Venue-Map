@@ -12,11 +12,24 @@ InteractiveVenueMap.prototype._initMap = function (id, options) {
   this.map = L.mapbox.map(id, options);
 };
 
+InteractiveVenueMap.prototype._clusterToMarkers = function (cluster) {
+  var markers = cluster._markers.slice();
+
+  var clusters = cluster._childClusters;
+
+  for (var i = 0; i < clusters.length; i++) {
+    markers = markers.concat(this._clusterToMarkers(clusters[i]));
+  }
+
+  return markers;
+};
+
 InteractiveVenueMap.prototype._initClusterGroup = function () {
+  var self = this;
+
   this.venueClusterGroup = new L.MarkerClusterGroup({
     disableClusteringAtZoom: 16,
     iconCreateFunction: function (cluster) {
-      console.log(cluster);
       return new L.divIcon({
         iconSize: L.point(56, (function calcHeight() {
           var rows = cluster.getChildCount();
@@ -29,8 +42,9 @@ InteractiveVenueMap.prototype._initClusterGroup = function () {
         className: 'venue-marker',
         html: (function () {
           var html = '';
-          for (var i = 0; i < cluster.getChildCount(); i++) {
-            html += '<div class="venue"></div>';
+          var markers = self._clusterToMarkers(cluster);
+          for (var i = 0; i < markers.length; i++) {
+            html += '<div class="venue" style="background: ' + markers[i]._venue.color + '"></div>';
           }
           return html;
         })()
@@ -102,7 +116,7 @@ InteractiveVenueMap.prototype.addVenues = function (venues) {
           popupAnchor: L.point(0, -15),
           iconSize: L.point(30, 30),
           className: 'venue-marker',
-          html: '<div class="venue"></div>'
+          html: '<div class="venue" style="background: ' + venue.color + '"></div>'
         }),
         title: venue.name
     });
@@ -132,8 +146,8 @@ var venues = (function generateDummyVenues () {
       image: 'http://www.funchap.com/wp-content/uploads/2014/03/baby-elephant-and-egrets.jpg',
       lat: Math.floor(Math.random()*10),
       lng: Math.floor(Math.random()*10),
-      color: 'red',
-      category: ['Athletic Venues', 'Accomandation & Events', 'Transportation'][Math.round(Math.random()*3)]
+      color: ['red', 'blue', 'green'][Math.round(Math.random()*2)],
+      category: ['Athletic Venues', 'Accomandation & Events', 'Transportation'][Math.round(Math.random()*2)]
     });
   }
 
