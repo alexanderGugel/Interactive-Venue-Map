@@ -95,12 +95,15 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     self._jumpTo(self.map, venue._marker, previousVenue._marker);
   });
 
+  var progressReport = $('<span class="progress">' + (venueIndex + 1) + '/' + this.venues.length + '</span>');
+
   var nextLink = $('<a href="#" class="next-venue">Next &raquo;</a>').click(function (event) {
     var nextVenue = self.venues[venueIndex + 1];
     self._jumpTo(self.map, venue._marker, nextVenue._marker);
   });
 
   main.append(previousLink);
+  main.append(progressReport);
   main.append(nextLink);
 
   return html[0];

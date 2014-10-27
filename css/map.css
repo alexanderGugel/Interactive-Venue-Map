@@ -50,11 +50,19 @@
   position: relative;
 }
 .leaflet-popup-content-wrapper main .next-venue,
-.leaflet-popup-content-wrapper main .previous-venue {
+.leaflet-popup-content-wrapper main .previous-venue,
+.leaflet-popup-content-wrapper main .progress {
   position: absolute;
   bottom: 0;
   display: inline-block;
   padding: 1em;
+}
+.leaflet-popup-content-wrapper main .progress {
+  display: block;
+  text-align: center;
+  color: rgba(204,204,204,0.8);
+  left: 0;
+  right: 0;
 }
 .leaflet-popup-content-wrapper main .next-venue {
   right: 0;
