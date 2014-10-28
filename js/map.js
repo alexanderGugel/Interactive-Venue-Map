@@ -154,10 +154,12 @@ InteractiveVenueMap.prototype.render = function (categories) {
     for (var j = 0; j < category.subCategories.length; j++) {
       var subCategory = category.subCategories[j];
       for (var k = 0; k < subCategory.venues.length; k++) {
-        var venue = subCategory.venues[k];
-        venue._category = category;
-        venue._subCategory = subCategory;
-        this.venues.push(venue);
+        if (!category.hidden && !subCategory.hidden) {
+          var venue = subCategory.venues[k];
+          venue._category = category;
+          venue._subCategory = subCategory;
+          this.venues.push(venue);
+        }
       }
     }
   }
