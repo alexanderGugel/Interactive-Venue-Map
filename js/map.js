@@ -142,8 +142,8 @@ InteractiveVenueMap.prototype.render = function (categories) {
         var venue = subCategory.venues[k];
         venue._category = category;
         venue._subCategory = subCategory;
-        this._venueToMarker(venue);
         this.venues.push(venue);
+        this._venueToMarker(venue);
       }
     }
   }
