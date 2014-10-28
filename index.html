@@ -52,7 +52,8 @@
           <section class="pure-g">
             <div class="pure-u-1-5 sub-category" ng-repeat="subCategory in selectedCategory.subCategories" ng-class="{'selected': !subCategory.hidden}">
               <a href="" ng-click="toggleCategory(subCategory)">
-                {{subCategory.category}}
+                <div class="venue" style="background: {{selectedCategory.color}}"></div>
+                {{subCategory.category}} ({{subCategory.venues.length}})
               </a>
             </div>
           </section>

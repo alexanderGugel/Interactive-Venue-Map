@@ -101,7 +101,6 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
   var venueIndex = this.venues.indexOf(venue);
 
   var previousLink = $('<a href="#" class="previous-venue">&laquo; Previous</a>').click(function (event) {
-    console.log('previous');
     var previousVenue = self.venues[venueIndex - 1];
     self._jumpTo(self.map, venue._marker, previousVenue._marker);
   });

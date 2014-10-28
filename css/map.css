@@ -76,10 +76,14 @@
   color: #fff;
   text-decoration: none;
 }
-#interactive-venue-map .filter section {
-  margin: 1em 0;
+#interactive-venue-map .filter main section {
+  margin: 1.5em 0 0.5em;
 }
-#interactive-venue-map .filter section .sub-category a {
+#interactive-venue-map .filter main section .sub-category .venue {
+  height: 1em;
+  width: 1em;
+}
+#interactive-venue-map .filter main section .sub-category a {
   padding: 0.5em;
   border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -87,16 +91,17 @@
   text-decoration: none;
   color: #fff;
 }
-#interactive-venue-map .filter section .sub-category.selected a {
+#interactive-venue-map .filter main section .sub-category.selected a {
   background: rgba(255,255,255,0.8);
   color: #444;
-  font-weight: bold;
 }
 #interactive-venue-map .map {
   width: 100%;
   height: 600px;
 }
 #interactive-venue-map .venue-marker {
+  width: 30px;
+  height: 30px;
   border: 1px solid #b9b9b9;
   padding: 1px;
   background: #fff;
@@ -105,12 +110,16 @@
   -webkit-border-radius: 2px;
 }
 #interactive-venue-map .venue-marker .venue {
+  float: left;
+}
+#interactive-venue-map .venue {
   margin: 1px;
   background: #d8d8d8;
   border: 1px solid #b9b9b9;
   height: 24px;
   width: 24px;
-  float: left;
+  display: inline-block;
+  vertical-align: middle;
 }
 #interactive-venue-map .leaflet-popup-content {
   padding: 0;

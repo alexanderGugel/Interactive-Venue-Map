@@ -61,28 +61,31 @@
               background: rgba(0, 0, 0, 0.5)
               color: #fff
               text-decoration: none
-    section
-      margin: 1em 0
-      .sub-category
-        a
-          padding: 0.5em
-          border-radius: 3px
-          -webkit-border-radius: 3px
-          -moz-border-radius: 3px
-          text-decoration: none
-          color: #fff
-
-        &.selected
+      section
+        margin: 1.5em 0 0.5em
+        .sub-category
+          .venue
+            height: 1em
+            width: 1em
           a
-            background: rgba(255, 255, 255, 0.8)
-            color: #444
-            font-weight: bold
+            padding: 0.5em
+            border-radius: 3px
+            -webkit-border-radius: 3px
+            -moz-border-radius: 3px
+            text-decoration: none
+            color: #fff
+          &.selected
+            a
+              background: rgba(255, 255, 255, 0.8)
+              color: #444
 
   .map
     width: 100%
     height: 600px
 
   .venue-marker
+    width: 30px
+    height: 30px
     border: 1px solid rgb(185, 185, 185)
     padding: 1px
     background: #fff
@@ -90,12 +93,16 @@
     -moz-border-radius: 2px
     -webkit-border-radius: 2px
     .venue
-      margin: 1px
-      background: rgb(216, 216, 216)
-      border: 1px solid rgb(185, 185, 185)
-      height: 24px
-      width: 24px
       float: left
+
+  .venue
+    margin: 1px
+    background: rgb(216, 216, 216)
+    border: 1px solid rgb(185, 185, 185)
+    height: 24px
+    width: 24px
+    display: inline-block
+    vertical-align: middle
 
   .leaflet-popup-content
     padding: 0
