@@ -1,35 +1,22 @@
+'use strict';
+
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWxleGFuZGVyZ3VnZWwiLCJhIjoiTHF6V3lBdyJ9.azWklrByWOL7jmYb0KSRdQ';
 
-var InteractiveVenueMap = function (container, options) {
-  this.container = container || $('#interactive-venue-map');
+var InteractiveVenueMap = function () {
+  this.container = $('#interactive-venue-map');
   this.mapElement = this.container.find('.map')[0];
 
-  options = options || {};
-  options.mapboxId = options.mapboxId || 'alexandergugel.k21hb9dm';
+  var options = {};
+  options.mapboxId = 'alexandergugel.k21hb9dm';
 
-  options.zoomControl = options.zoomControl || false;
+  options.zoomControl = false;
 
   this._initMap(options);
   this._initClusterGroup();
-  this._initControl();
 };
 
 InteractiveVenueMap.prototype._initMap = function (options) {
   this.map = L.mapbox.map(this.mapElement, options.mapboxId, options);
-};
-
-InteractiveVenueMap.prototype._initControl = function () {
-  var main = this.container.find('main');
-  var toggleButton = this.container.find('.toggle');
-
-  toggleButton.on('click', function () {
-    $(this).find('i').toggleClass('inactive');
-    main.toggle(100);
-  });
-
-  
-
-
 };
 
 InteractiveVenueMap.prototype._clusterToMarkers = function (cluster) {
