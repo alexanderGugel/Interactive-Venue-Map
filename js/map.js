@@ -71,10 +71,9 @@ InteractiveVenueMap.prototype._jumpTo = function (map, oldMarker, newMarker) {
     return;
   }
   oldMarker.closePopup();
-  map.panTo(newMarker.getLatLng());
-  setTimeout(function () {
+  this.venueClusterGroup.zoomToShowLayer(newMarker, function () {
     newMarker.openPopup();
-  }, 300);
+  });
 };
 
 InteractiveVenueMap.prototype._venueToPopup = function (venue) {
@@ -102,6 +101,7 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
   var venueIndex = this.venues.indexOf(venue);
 
   var previousLink = $('<a href="#" class="previous-venue">&laquo; Previous</a>').click(function (event) {
+    console.log('previous');
     var previousVenue = self.venues[venueIndex - 1];
     self._jumpTo(self.map, venue._marker, previousVenue._marker);
   });
@@ -113,9 +113,9 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
     self._jumpTo(self.map, venue._marker, nextVenue._marker);
   });
 
-  main.append(previousLink);
+  progressReport.append(previousLink);
+  progressReport.append(nextLink);
   main.append(progressReport);
-  main.append(nextLink);
 
   return html[0];
 };
