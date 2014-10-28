@@ -50,6 +50,13 @@
           </nav>
 
           <section class="pure-g">
+            <div class="pure-u-1-5 sub-category" ng-class="{'selected': !selectedCategory.hidden}">
+              <a href="" ng-click="toggleCategory(selectedCategory)">
+                <div class="venue" style="background: {{selectedCategory.color}}"></div>
+                {{selectedCategory.category}} ({{countVenues(selectedCategory)}})
+              </a>
+            </div>
+
             <div class="pure-u-1-5 sub-category" ng-repeat="subCategory in selectedCategory.subCategories" ng-class="{'selected': !subCategory.hidden}">
               <a href="" ng-click="toggleCategory(subCategory)">
                 <div class="venue" style="background: {{selectedCategory.color}}"></div>

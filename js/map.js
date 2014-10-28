@@ -202,4 +202,12 @@ InteractiveVenueMapModule.controller('FilterCtrl', ['$scope', '$window', functio
     category.hidden = !category.hidden;
     $window.interactiveVenueMap.rerender();
   };
+
+  $scope.countVenues = function (category) {
+    var count = 0
+    for (var i = 0; i < category.subCategories.length; i++) {
+      count += category.subCategories[i].venues.length;
+    }
+    return count;
+  }
 }]);
