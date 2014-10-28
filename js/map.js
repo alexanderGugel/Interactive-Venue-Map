@@ -124,9 +124,6 @@ InteractiveVenueMap.prototype._venueToMarkerHTML = function (venue) {
 };
 
 InteractiveVenueMap.prototype._venueToMarker = function (venue) {
-  if (venue._subCategory.hidden && venue._category.hidden) {
-    return;
-  }
   var marker = L.marker(new L.LatLng(venue.lat, venue.lng), {
       icon: L.divIcon({
         popupAnchor: L.point(0, -15),
