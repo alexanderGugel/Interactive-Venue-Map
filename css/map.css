@@ -37,6 +37,9 @@
 #interactive-venue-map .filter main nav {
   margin: 0.5em 0;
 }
+#interactive-venue-map .filter main nav * {
+  box-sizing: border-box;
+}
 #interactive-venue-map .filter main nav ul {
   padding: 0;
   margin: 0;
