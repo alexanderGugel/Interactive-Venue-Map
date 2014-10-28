@@ -1,26 +1,28 @@
 #interactive-venue-map {
   position: relative;
 }
+#interactive-venue-map [ng-click] {
+  cursor: pointer;
+}
 #interactive-venue-map .filter {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   width: 100%;
-  background: rgba(0,0,0,0.5);
   z-Index: 1000000;
 }
 #interactive-venue-map .filter header {
   padding: 0.5em 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   color: rgba(255,255,255,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
 }
 #interactive-venue-map .filter header span {
   padding: 0.5em;
 }
 #interactive-venue-map .filter header .toggle {
-  background: #f5821f;
-  cursor: pointer;
+  background: rgba(245,130,31,0.9);
 }
 #interactive-venue-map .filter header .toggle .inactive {
   display: none;
@@ -30,6 +32,10 @@
 }
 #interactive-venue-map .filter main {
   padding: 0.5em;
+  background: rgba(0,0,0,0.6);
+}
+#interactive-venue-map .filter main nav {
+  margin: 0.5em 0;
 }
 #interactive-venue-map .filter main nav ul {
   padding: 0;
@@ -37,11 +43,35 @@
   list-style: none;
 }
 #interactive-venue-map .filter main nav ul li {
-  display: inline-block;
-  padding: 0.5em;
+  text-align: center;
+  padding: 0 0.5em;
+  position: relative;
 }
-#interactive-venue-map .filter main nav ul li .selected {
-  color: #f00;
+#interactive-venue-map .filter main nav ul li span {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  background: #fff;
+  width: 10px;
+  height: 1px;
+}
+#interactive-venue-map .filter main nav ul li span:first-child {
+  left: -1px;
+}
+#interactive-venue-map .filter main nav ul li span:last-child {
+  right: -1px;
+}
+#interactive-venue-map .filter main nav ul li.selected a {
+  background: none;
+  border-bottom: none;
+}
+#interactive-venue-map .filter main nav ul li a {
+  border: 1px solid #fff;
+  display: block;
+  padding: 10px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  text-decoration: none;
 }
 #interactive-venue-map .map {
   width: 100%;

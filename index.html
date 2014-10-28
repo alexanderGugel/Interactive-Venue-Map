@@ -28,20 +28,22 @@
           <div class="pure-u-1-2">
             <span><strong>Potential Venue Map</strong> &Iota; San Francisco 2024</span>
           </div>
-          <div class="pure-u-1-2">
+          <div class="pure-u-1-2" ng-click="showFilter = !showFilter">
             <span>Hide Map Categories</span>
-            <span class="toggle" ng-click="showFilter = !showFilter">
+            <span class="toggle">
               <i class="icon ion-navicon-round" ng-if="!showFilter"></i><i class="icon ion-close" ng-if="showFilter"></i>
             </span>
           </div>
         </header>
         <main ng-if="showFilter">
           <nav>
-            <ul>
-              <li ng-repeat="category in venues">
-                <a href="" ng-click="changeCategory(category)" ng-class="{'selected': (selectedCategory === category)}">
+            <ul class="pure-g">
+              <li ng-repeat="category in venues" ng-class="{'selected': (selectedCategory === category)}" class="pure-u-1-3">
+                <span></span>
+                <a href="" ng-click="changeCategory(category)">
                   {{category.category}}
                 </a>
+                <span></span>
               </li>
             </ul>
           </nav>

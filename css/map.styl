@@ -1,39 +1,63 @@
 #interactive-venue-map
   position: relative
 
+  [ng-click]
+    cursor: pointer
   .filter
     position: absolute
     top: 0
     right: 0
     left: 0
     width: 100%
-    background: rgba(0, 0, 0, 0.5)
     z-Index: 1000000
     header
       padding: 0.5em 0
-      background: rgba(0, 0, 0, 0.5)
+      background: rgba(0, 0, 0, 0.8)
       color: rgba(255, 255, 255, 0.8)
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5)
       span
         padding: 0.5em
       .toggle
-        background: rgba(245, 130, 31, 1)
-        cursor: pointer
+        background: rgba(245, 130, 31, 0.9)
         .inactive
           display: none
       :last-child
         text-align: right
     main
       padding: 0.5em
+      background: rgba(0, 0, 0, 0.6)
       nav
+        margin: 0.5em 0
         ul
           padding: 0
           margin: 0
           list-style: none
           li
-            display: inline-block
-            padding: 0.5em
-            .selected
-              color: red
+            text-align: center
+            padding: 0 0.5em
+            position: relative
+            span
+              position: absolute
+              display: block
+              bottom: 0
+              &:first-child
+                left: -1px
+              &:last-child
+                right: -1px
+              background: #fff
+              width: 10px
+              height: 1px
+            &.selected
+              a
+                background: none
+                border-bottom: none
+            a
+              border: 1px solid #fff
+              display: block
+              padding: 10px
+              background: rgba(0, 0, 0, 0.5)
+              color: #fff
+              text-decoration: none
 
   .map
     width: 100%
