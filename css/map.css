@@ -60,7 +60,7 @@
 .leaflet-popup-content-wrapper main .progress {
   display: block;
   text-align: center;
-  color: rgba(204,204,204,0.8);
+  color: #ccc;
   left: 0;
   right: 0;
 }

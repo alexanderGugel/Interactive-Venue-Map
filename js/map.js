@@ -44,7 +44,7 @@ InteractiveVenueMap.prototype._initClusterGroup = function () {
           var html = '';
           var markers = self._clusterToMarkers(cluster);
           for (var i = 0; i < markers.length; i++) {
-            html += '<div class="venue" style="background: ' + markers[i]._venue.color + '"></div>';
+            html += self._venueToMarkerHTML(markers[i]._venue);
           }
           return html;
         })()
@@ -109,26 +109,43 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
   return html[0];
 };
 
-InteractiveVenueMap.prototype.addVenues = function (venues) {
-  this.venues = venues;
+InteractiveVenueMap.prototype._venueToMarkerHTML = function (venue) {
+  return '<div class="venue" style="background: ' + venue._category.color + '"></div>';
+};
 
-  for (var i = 0; i < venues.length; i++) {
-    var venue = venues[i];
-    var marker = L.marker(new L.LatLng(venue.lat, venue.lng), {
-        icon: L.divIcon({
-          popupAnchor: L.point(0, -15),
-          iconSize: L.point(30, 30),
-          className: 'venue-marker',
-          html: '<div class="venue" style="background: ' + venue.color + '"></div>'
-        }),
-        title: venue.name
-    });
-    marker._venue = venue;
-    venue._marker = marker;
-    marker.bindPopup(this._venueToPopup(venue), {
-      closeButton: false
-    });
-    this.venueClusterGroup.addLayer(marker);
+InteractiveVenueMap.prototype._venueToMarker = function (venue) {
+  var marker = L.marker(new L.LatLng(venue.lat, venue.lng), {
+      icon: L.divIcon({
+        popupAnchor: L.point(0, -15),
+        iconSize: L.point(30, 30),
+        className: 'venue-marker',
+        html: this._venueToMarkerHTML(venue)
+      }),
+      title: venue.name
+  });
+  marker._venue = venue;
+  venue._marker = marker;
+  marker.bindPopup(this._venueToPopup(venue), {
+    closeButton: false
+  });
+  this.venueClusterGroup.addLayer(marker);
+}
+
+InteractiveVenueMap.prototype.render = function (categories) {
+  this.venues = [];
+
+  for (var i = 0; i < categories.length; i++) {
+    var category = categories[i];
+    for (var j = 0; j < category.subCategories.length; j++) {
+      var subCategory = category.subCategories[j];
+      for (var k = 0; k < subCategory.venues.length; k++) {
+        var venue = subCategory.venues[k];
+        venue._category = category;
+        venue._subCategory = subCategory;
+        this._venueToMarker(venue);
+        this.venues.push(venue);
+      }
+    }
   }
 };
 
