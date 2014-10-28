@@ -29,7 +29,8 @@
             <span><strong>Potential Venue Map</strong> &Iota; San Francisco 2024</span>
           </div>
           <div class="pure-u-1-2" ng-click="showFilter = !showFilter">
-            <span>Hide Map Categories</span>
+            <span ng-if="showFilter">Hide Map Categories</span>
+            <span ng-if="!showFilter">Show Map Categories</span>
             <span class="toggle">
               <i class="icon ion-navicon-round" ng-if="!showFilter"></i><i class="icon ion-close" ng-if="showFilter"></i>
             </span>
