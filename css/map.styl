@@ -1,6 +1,35 @@
 #interactive-venue-map
-  width: 100%
-  height: 600px
+  position: relative
+
+  .filter
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    width: 100%
+    background: rgba(0, 0, 0, 0.5)
+    z-Index: 1000000
+    header
+      padding: 0.5em 0
+      background: rgba(0, 0, 0, 0.5)
+      color: rgba(255, 255, 255, 0.8)
+      span
+        padding: 0.5em
+      .toggle
+        background: rgba(245, 130, 31, 1)
+        cursor: pointer
+        .inactive
+          display: none
+      :last-child
+        text-align: right
+    main
+      padding: 0.5em
+      &.inactive
+        display: none
+
+  .map
+    width: 100%
+    height: 600px
 
   .venue-marker
     border: 1px solid rgb(185, 185, 185)

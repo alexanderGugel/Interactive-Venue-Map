@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css">
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css">
 
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.5.0/base-min.css&pure/0.5.0/grids-min.css&pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
@@ -21,7 +23,22 @@
   </head>
   <body>
     <div id="interactive-venue-map">
-
+      <div class="filter">
+        <header class="pure-g">
+          <div class="pure-u-1-2">
+            <span><strong>Potential Venue Map</strong> &Iota; San Francisco 2024</span>
+          </div>
+          <div class="pure-u-1-2">
+            <span>Hide Map Categories</span>
+            <span class="toggle"><i class="icon ion-navicon-round"></i><i class="icon ion-close inactive"></i></span>
+          </div>
+        </header>
+        <main class="inactive">
+          
+        </main>
+      </div>
+      <div class="map">
+      </div>
     </div>
 
     <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js"></script>

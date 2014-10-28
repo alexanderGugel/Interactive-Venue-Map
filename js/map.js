@@ -1,16 +1,35 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWxleGFuZGVyZ3VnZWwiLCJhIjoiTHF6V3lBdyJ9.azWklrByWOL7jmYb0KSRdQ';
 
-var InteractiveVenueMap = function (id, options) {
-  id = id || 'interactive-venue-map';
-  options = options || 'alexandergugel.k21hb9dm';
+var InteractiveVenueMap = function (container, options) {
+  this.container = container || $('#interactive-venue-map');
+  this.mapElement = this.container.find('.map')[0];
 
-  this._initMap(id, options);
+  options = options || {};
+  options.mapboxId = options.mapboxId || 'alexandergugel.k21hb9dm';
+
+  options.zoomControl = options.zoomControl || false;
+
+  this._initMap(options);
   this._initClusterGroup();
+  this._initControl();
 };
 
-InteractiveVenueMap.prototype._initMap = function (id, options) {
-  this.id = id;
-  this.map = L.mapbox.map(id, options);
+InteractiveVenueMap.prototype._initMap = function (options) {
+  this.map = L.mapbox.map(this.mapElement, options.mapboxId, options);
+};
+
+InteractiveVenueMap.prototype._initControl = function () {
+  var main = this.container.find('main');
+  var toggleButton = this.container.find('.toggle');
+
+  toggleButton.on('click', function () {
+    $(this).find('i').toggleClass('inactive');
+    main.toggle(100);
+  });
+
+  
+
+
 };
 
 InteractiveVenueMap.prototype._clusterToMarkers = function (cluster) {
@@ -138,6 +157,7 @@ InteractiveVenueMap.prototype._venueToMarker = function (venue) {
 
 InteractiveVenueMap.prototype.render = function (categories) {
   this.venues = [];
+  this.categories = categories;
 
   for (var i = 0; i < categories.length; i++) {
     var category = categories[i];
@@ -164,18 +184,18 @@ InteractiveVenueMap.prototype.clearVenues = function () {
   InteractiveVenueMap.clearLayers();
 };
 
-// var InteractiveVenueMapModule = angular.module('InteractiveVenueMap', []);
-//
-// InteractiveVenueMapModule.directive('map', [function () {
-//   var map;
-//
-//   var link = function (scope, element, attrs) {
-//     element.addClass('interactive-venue-map');
-//     map = map || new InteractiveVenueMap(element[0]);
-//   };
-//
-//   return {
-//     restrict: 'E',
-//     link: link
-//   };
-// }]);
+var InteractiveVenueMapModule = angular.module('InteractiveVenueMapControl', []);
+
+InteractiveVenueMapModule.directive('map', [function () {
+  var map;
+
+  var link = function (scope, element, attrs) {
+    element.addClass('interactive-venue-map');
+    map = map || new InteractiveVenueMap(element[0]);
+  };
+
+  return {
+    restrict: 'E',
+    link: link
+  };
+}]);

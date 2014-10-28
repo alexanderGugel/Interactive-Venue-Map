@@ -1,4 +1,40 @@
 #interactive-venue-map {
+  position: relative;
+}
+#interactive-venue-map .filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  z-Index: 1000000;
+}
+#interactive-venue-map .filter header {
+  padding: 0.5em 0;
+  background: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,0.8);
+}
+#interactive-venue-map .filter header span {
+  padding: 0.5em;
+}
+#interactive-venue-map .filter header .toggle {
+  background: #f5821f;
+  cursor: pointer;
+}
+#interactive-venue-map .filter header .toggle .inactive {
+  display: none;
+}
+#interactive-venue-map .filter header :last-child {
+  text-align: right;
+}
+#interactive-venue-map .filter main {
+  padding: 0.5em;
+}
+#interactive-venue-map .filter main.inactive {
+  display: none;
+}
+#interactive-venue-map .map {
   width: 100%;
   height: 600px;
 }
