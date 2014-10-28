@@ -1,7 +1,7 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWxleGFuZGVyZ3VnZWwiLCJhIjoiTHF6V3lBdyJ9.azWklrByWOL7jmYb0KSRdQ';
 
 var InteractiveVenueMap = function (id, options) {
-  id = id || 'map';
+  id = id || 'interactive-venue-map';
   options = options || 'alexandergugel.k21hb9dm';
 
   this._initMap(id, options);
@@ -9,6 +9,7 @@ var InteractiveVenueMap = function (id, options) {
 };
 
 InteractiveVenueMap.prototype._initMap = function (id, options) {
+  this.id = id;
   this.map = L.mapbox.map(id, options);
 };
 
@@ -22,6 +23,10 @@ InteractiveVenueMap.prototype._clusterToMarkers = function (cluster) {
   }
 
   return markers;
+};
+
+InteractiveVenueMap.prototype._initCategoryFilter = function () {
+  $(this.id).find('.category-filter').empty();
 };
 
 InteractiveVenueMap.prototype._initClusterGroup = function () {
@@ -147,6 +152,8 @@ InteractiveVenueMap.prototype.render = function (categories) {
       }
     }
   }
+
+  this._initCategoryFilter();
 };
 
 InteractiveVenueMap.prototype.clearVenues = function () {
