@@ -148,9 +148,12 @@ InteractiveVenueMap.prototype.render = function (categories) {
         venue._category = category;
         venue._subCategory = subCategory;
         this.venues.push(venue);
-        this._venueToMarker(venue);
       }
     }
+  }
+
+  for (var l = 0; l < this.venues.length; l++) {
+    this._venueToMarker(this.venues[l]);
   }
 
   this._initCategoryFilter();
@@ -160,3 +163,19 @@ InteractiveVenueMap.prototype.clearVenues = function () {
   delete this.venues;
   InteractiveVenueMap.clearLayers();
 };
+
+// var InteractiveVenueMapModule = angular.module('InteractiveVenueMap', []);
+//
+// InteractiveVenueMapModule.directive('map', [function () {
+//   var map;
+//
+//   var link = function (scope, element, attrs) {
+//     element.addClass('interactive-venue-map');
+//     map = map || new InteractiveVenueMap(element[0]);
+//   };
+//
+//   return {
+//     restrict: 'E',
+//     link: link
+//   };
+// }]);
