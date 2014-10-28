@@ -192,6 +192,13 @@ InteractiveVenueMapModule.controller('FilterCtrl', ['$scope', '$window', functio
     $scope.selectedCategory = category;
   };
 
+  $scope.toggleSubCategory = function (subCategory) {
+    var venues = subCategory.venues;
+    for (var i = 0; i < venues.length; i++) {
+      venues[i]._marker.hide();
+    }
+  };
+
   $scope.$watch('selectedCategory', function () {
     console.log($scope.selectedCategory);
   });

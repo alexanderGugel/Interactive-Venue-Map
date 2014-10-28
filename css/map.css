@@ -1,6 +1,9 @@
 #interactive-venue-map {
   position: relative;
 }
+#interactive-venue-map * {
+  box-sizing: border-box;
+}
 #interactive-venue-map [ng-click] {
   cursor: pointer;
 }
@@ -37,9 +40,6 @@
 #interactive-venue-map .filter main nav {
   margin: 0.5em 0;
 }
-#interactive-venue-map .filter main nav * {
-  box-sizing: border-box;
-}
 #interactive-venue-map .filter main nav ul {
   padding: 0;
   margin: 0;
@@ -75,6 +75,16 @@
   background: rgba(0,0,0,0.5);
   color: #fff;
   text-decoration: none;
+}
+#interactive-venue-map .filter section {
+  margin-top: 1em;
+}
+#interactive-venue-map .filter section a {
+  text-decoration: none;
+  color: #fff;
+}
+#interactive-venue-map .filter section a.selected {
+  background: rgba(255,255,255,0.1);
 }
 #interactive-venue-map .map {
   width: 100%;

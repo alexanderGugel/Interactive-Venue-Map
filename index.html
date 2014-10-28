@@ -48,10 +48,11 @@
             </ul>
           </nav>
 
-          {{selectedCategory.category}}
           <section class="pure-g">
             <div class="pure-u-1-5" ng-repeat="subCategory in selectedCategory.subCategories">
-              {{subCategory.category}}
+              <a href="" ng-click="toggleSubCategory(subCategory)">
+                {{subCategory.category}}
+              </a>
             </div>
           </section>
 
