@@ -124,7 +124,7 @@ InteractiveVenueMap.prototype._venueToMarkerHTML = function (venue) {
 };
 
 InteractiveVenueMap.prototype._venueToMarker = function (venue) {
-  if (venue._subCategory.hidden || venue._category.hidden) {
+  if (venue._subCategory.hidden && venue._category.hidden) {
     return;
   }
   var marker = L.marker(new L.LatLng(venue.lat, venue.lng), {
@@ -153,7 +153,7 @@ InteractiveVenueMap.prototype.render = function (categories) {
     for (var j = 0; j < category.subCategories.length; j++) {
       var subCategory = category.subCategories[j];
       for (var k = 0; k < subCategory.venues.length; k++) {
-        if (!category.hidden && !subCategory.hidden) {
+        if (!category.hidden || !subCategory.hidden) {
           var venue = subCategory.venues[k];
           venue._category = category;
           venue._subCategory = subCategory;
