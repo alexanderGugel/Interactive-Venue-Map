@@ -125,6 +125,9 @@ InteractiveVenueMap.prototype._venueToMarkerHTML = function (venue) {
 };
 
 InteractiveVenueMap.prototype._venueToMarker = function (venue) {
+  if (venue._subCategory.hidden || venue._category.hidden) {
+    return;
+  }
   var marker = L.marker(new L.LatLng(venue.lat, venue.lng), {
       icon: L.divIcon({
         popupAnchor: L.point(0, -15),
@@ -167,39 +170,35 @@ InteractiveVenueMap.prototype.render = function (categories) {
 };
 
 InteractiveVenueMap.prototype.clearVenues = function () {
+  delete this.categories;
   delete this.venues;
-  InteractiveVenueMap.clearLayers();
+  this.venueClusterGroup.clearLayers();
+};
+
+InteractiveVenueMap.prototype.rerender = function () {
+  var venues = this.categories.slice();
+  this.clearVenues();
+  this.render(venues);
 };
 
 var InteractiveVenueMapModule = angular.module('InteractiveVenueMap', []);
 
 InteractiveVenueMapModule.run(['$window', function ($window) {
   $window.interactiveVenueMap = new InteractiveVenueMap();
+  $window.interactiveVenueMap.render($window.venues);
 }]);
 
 InteractiveVenueMapModule.controller('FilterCtrl', ['$scope', '$window', function($scope, $window) {
-  var originalVenues = $window.venues.slice();
+  $scope.venues = $window.venues;
 
-  $scope.venues = originalVenues.slice();
-
-  $scope.selectedCategory = originalVenues[0];
-
-  $scope.$watch('venues', function () {
-    $window.interactiveVenueMap.render($scope.venues);
-  });
+  $scope.selectedCategory = $scope.venues[0];
 
   $scope.changeCategory = function (category) {
     $scope.selectedCategory = category;
   };
 
-  $scope.toggleSubCategory = function (subCategory) {
-    var venues = subCategory.venues;
-    for (var i = 0; i < venues.length; i++) {
-      venues[i]._marker.hide();
-    }
+  $scope.toggleCategory = function (category) {
+    category.hidden = !category.hidden;
+    $window.interactiveVenueMap.rerender();
   };
-
-  $scope.$watch('selectedCategory', function () {
-    console.log($scope.selectedCategory);
-  });
 }]);

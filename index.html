@@ -49,8 +49,8 @@
           </nav>
 
           <section class="pure-g">
-            <div class="pure-u-1-5" ng-repeat="subCategory in selectedCategory.subCategories">
-              <a href="" ng-click="toggleSubCategory(subCategory)">
+            <div class="pure-u-1-5 sub-category" ng-repeat="subCategory in selectedCategory.subCategories" ng-class="{'selected': !subCategory.hidden}">
+              <a href="" ng-click="toggleCategory(subCategory)">
                 {{subCategory.category}}
               </a>
             </div>

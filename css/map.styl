@@ -63,11 +63,20 @@
               text-decoration: none
     section
       margin-top: 1em
-      a
-        text-decoration: none
-        color: #fff
+      .sub-category
+        a
+          padding: 0.5em
+          border-radius: 3px
+          -webkit-border-radius: 3px
+          -moz-border-radius: 3px
+          text-decoration: none
+          color: #fff
+
         &.selected
-          background: rgba(255, 255, 255, 0.1)
+          a
+            background: rgba(255, 255, 255, 0.8)
+            color: #444
+
   .map
     width: 100%
     height: 600px
