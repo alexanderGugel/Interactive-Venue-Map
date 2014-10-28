@@ -171,18 +171,28 @@ InteractiveVenueMap.prototype.clearVenues = function () {
   InteractiveVenueMap.clearLayers();
 };
 
-var InteractiveVenueMapModule = angular.module('InteractiveVenueMapControl', []);
+var InteractiveVenueMapModule = angular.module('InteractiveVenueMap', []);
 
-InteractiveVenueMapModule.directive('map', [function () {
-  var map;
+InteractiveVenueMapModule.run(['$window', function ($window) {
+  $window.interactiveVenueMap = new InteractiveVenueMap();
+}]);
 
-  var link = function (scope, element, attrs) {
-    element.addClass('interactive-venue-map');
-    map = map || new InteractiveVenueMap(element[0]);
+InteractiveVenueMapModule.controller('FilterCtrl', ['$scope', '$window', function($scope, $window) {
+  var originalVenues = $window.venues.slice();
+
+  $scope.venues = originalVenues.slice();
+
+  $scope.selectedCategory = originalVenues[0];
+
+  $scope.$watch('venues', function () {
+    $window.interactiveVenueMap.render($scope.venues);
+  });
+
+  $scope.changeCategory = function (category) {
+    $scope.selectedCategory = category;
   };
 
-  return {
-    restrict: 'E',
-    link: link
-  };
+  $scope.$watch('selectedCategory', function () {
+    console.log($scope.selectedCategory);
+  });
 }]);

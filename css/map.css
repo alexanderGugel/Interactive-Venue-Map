@@ -31,8 +31,17 @@
 #interactive-venue-map .filter main {
   padding: 0.5em;
 }
-#interactive-venue-map .filter main.inactive {
-  display: none;
+#interactive-venue-map .filter main nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#interactive-venue-map .filter main nav ul li {
+  display: inline-block;
+  padding: 0.5em;
+}
+#interactive-venue-map .filter main nav ul li .selected {
+  color: #f00;
 }
 #interactive-venue-map .map {
   width: 100%;

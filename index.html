@@ -22,19 +22,37 @@
     <link rel="stylesheet" href="css/map.css">
   </head>
   <body>
-    <div id="interactive-venue-map">
-      <div class="filter">
+    <div id="interactive-venue-map" ng-app="InteractiveVenueMap">
+      <div class="filter" ng-controller="FilterCtrl">
         <header class="pure-g">
           <div class="pure-u-1-2">
             <span><strong>Potential Venue Map</strong> &Iota; San Francisco 2024</span>
           </div>
           <div class="pure-u-1-2">
             <span>Hide Map Categories</span>
-            <span class="toggle"><i class="icon ion-navicon-round"></i><i class="icon ion-close inactive"></i></span>
+            <span class="toggle" ng-click="showFilter = !showFilter">
+              <i class="icon ion-navicon-round" ng-if="!showFilter"></i><i class="icon ion-close" ng-if="showFilter"></i>
+            </span>
           </div>
         </header>
-        <main class="inactive">
-          <nav></nav>
+        <main ng-if="showFilter">
+          <nav>
+            <ul>
+              <li ng-repeat="category in venues">
+                <a href="" ng-click="changeCategory(category)" ng-class="{'selected': (selectedCategory === category)}">
+                  {{category.category}}
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {{selectedCategory.category}}
+          <section class="pure-g">
+            <div class="pure-u-1-5" ng-repeat="subCategory in selectedCategory.subCategories">
+              {{subCategory.category}}
+            </div>
+          </section>
+
         </main>
       </div>
       <div class="map">
@@ -57,14 +75,13 @@
             image: 'http://www.funchap.com/wp-content/uploads/2014/03/baby-elephant-and-egrets.jpg',
             lat: Math.floor(Math.random()*10),
             lng: Math.floor(Math.random()*10)
-            // color: ['red', 'blue', 'green'][Math.round(Math.random()*2)]
           });
         }
 
         return venues;
       };
 
-      var categories = [{
+      window.venues = [{
         category: 'Athletic Venues',
         color: 'red',
         subCategories: [{
@@ -80,10 +97,23 @@
           category: 'Basketball',
           venues: makeRandomVenues(10)
         }]
+      }, {
+        category: 'Athletic Venues 2',
+        color: 'blue',
+        subCategories: [{
+          category: 'Athletic 2',
+          venues: makeRandomVenues(3)
+        }, {
+          category: 'Archery 2',
+          venues: makeRandomVenues(4)
+        }, {
+          category: 'Badminton 2',
+          venues: makeRandomVenues(7)
+        }, {
+          category: 'Basketball 2',
+          venues: makeRandomVenues(1)
+        }]
       }];
-
-      var interactiveVenueMap = new InteractiveVenueMap();
-      interactiveVenueMap.render(categories);
     </script>
   </body>
 </html>
