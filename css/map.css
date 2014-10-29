@@ -14,6 +14,11 @@
   left: 0;
   width: 100%;
   z-Index: 1000000;
+  height: 100%;
+  bottom: 0;
+}
+#interactive-venue-map .filter.active {
+  background: rgba(0,0,0,0.6);
 }
 #interactive-venue-map .filter header {
   padding: 0.5em 0;
@@ -35,7 +40,6 @@
 }
 #interactive-venue-map .filter main {
   padding: 0.5em;
-  background: rgba(0,0,0,0.6);
 }
 #interactive-venue-map .filter main nav {
   margin: 0.5em 0;
