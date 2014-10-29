@@ -17,6 +17,12 @@ var InteractiveVenueMap = function () {
 
 InteractiveVenueMap.prototype._initMap = function (options) {
   this.map = L.mapbox.map(this.mapElement, options.mapboxId, options);
+
+  this.zoomControl = L.control.zoom({
+    position: 'topright'
+  });
+
+  this.zoomControl.addTo(this.map);
 };
 
 InteractiveVenueMap.prototype._clusterToMarkers = function (cluster) {
@@ -81,6 +87,14 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
 
   var header = $('<header />');
   var h1 = $('<h1 />');
+  // var closeButton = $('<button />');
+  // closeButton.text('✖');
+
+  // closeButton.click(function (evene) {
+  //
+  // });
+
+  // header.apend(closeButton);
   header.append(h1);
 
   var main = $('<main />');
@@ -140,7 +154,7 @@ InteractiveVenueMap.prototype._venueToMarker = function (venue) {
   marker._venue = venue;
   venue._marker = marker;
   marker.bindPopup(this._venueToPopup(venue), {
-    closeButton: false
+    // closeButton: false
   });
   this.venueClusterGroup.addLayer(marker);
 }

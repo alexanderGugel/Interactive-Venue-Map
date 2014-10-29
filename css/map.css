@@ -112,6 +112,9 @@
 #interactive-venue-map .venue-marker .venue {
   float: left;
 }
+#interactive-venue-map .leaflet-control-zoom {
+  margin-top: 45px;
+}
 #interactive-venue-map .venue {
   margin: 1px;
   background: #d8d8d8;
