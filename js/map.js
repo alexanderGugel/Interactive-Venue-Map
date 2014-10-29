@@ -233,4 +233,10 @@ InteractiveVenueMapModule.controller('FilterCtrl', ['$scope', '$window', functio
     }
     return count;
   }
+
+  for (var i = 0; i < $scope.venues.length; i++) {
+    var category = $scope.venues[i];
+    $scope.toggleCategory(category);
+    $scope.toggleCategory(category);
+  }
 }]);
