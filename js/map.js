@@ -213,8 +213,16 @@ InteractiveVenueMapModule.controller('FilterCtrl', ['$scope', '$window', functio
     $scope.selectedCategory = category;
   };
 
-  $scope.toggleCategory = function (category) {
-    category.hidden = !category.hidden;
+  $scope.toggleCategory = function (category, subCategory) {
+    if (subCategory) {
+      subCategory.hidden = !subCategory.hidden;
+      category.hidden = true;
+    } else {
+      category.hidden = !category.hidden;
+      for (var i = 0; i < category.subCategories.length; i++) {
+        category.subCategories[i].hidden = true;
+      }
+    }
     $window.interactiveVenueMap.rerender();
   };
 
