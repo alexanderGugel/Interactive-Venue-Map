@@ -120,7 +120,11 @@ InteractiveVenueMap.prototype._venueToPopup = function (venue) {
 };
 
 InteractiveVenueMap.prototype._venueToMarkerHTML = function (venue) {
-  return '<div class="venue" style="background: ' + venue._category.color + '"></div>';
+  var html = '';
+  html += '<div class="venue" style="background: ' + venue._category.color + '">';
+  html += venue._subCategory.icon ? '<img src="' + venue._subCategory.icon + '">' : '';
+  html += '</div>';
+  return html;
 };
 
 InteractiveVenueMap.prototype._venueToMarker = function (venue) {

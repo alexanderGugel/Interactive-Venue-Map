@@ -121,6 +121,10 @@
   display: inline-block;
   vertical-align: middle;
 }
+#interactive-venue-map .venue img {
+  height: 100%;
+  width: 100%;
+}
 #interactive-venue-map .leaflet-popup-content {
   padding: 0;
 }

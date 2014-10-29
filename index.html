@@ -53,13 +53,13 @@
             <div class="pure-u-1-5 sub-category" ng-class="{'selected': !selectedCategory.hidden}">
               <a href="" ng-click="toggleCategory(selectedCategory)">
                 <div class="venue" style="background: {{selectedCategory.color}}"></div>
-                {{selectedCategory.category}} ({{countVenues(selectedCategory)}})
+                <strong>All {{selectedCategory.category}} ({{countVenues(selectedCategory)}})</strong>
               </a>
             </div>
 
             <div class="pure-u-1-5 sub-category" ng-repeat="subCategory in selectedCategory.subCategories" ng-class="{'selected': !subCategory.hidden}">
               <a href="" ng-click="toggleCategory(subCategory)">
-                <div class="venue" style="background: {{selectedCategory.color}}"></div>
+                <div class="venue" style="background: {{selectedCategory.color}}"><img src="{{subCategory.icon}}" ng-if="subCategory.icon"></div>
                 {{subCategory.category}} ({{subCategory.venues.length}})
               </a>
             </div>
@@ -84,7 +84,6 @@
           venues.push({
             name: 'Golf Course',
             description: 'Aute incididunt officia magna tempor ad id nulla incididunt Lorem non eiusmod culpa adipisicing voluptate. Laboris veniam duis do sit ea nostrud esse ea irure in cupidatat. Irure irure cillum Lorem ex cillum anim sit exercitation eu laboris culpa proident eiusmod. Sunt proident esse exercitation mollit aliquip culpa ad. Cillum laborum ea dolore est irure laboris sit nostrud reprehenderit eu laboris tempor eiusmod incididunt. Anim mollit excepteur culpa consequat eu proident Lorem eiusmod consequat est. Commodo culpa dolor pariatur culpa proident aliqua exercitation id in commodo ut.',
-            image: 'http://www.funchap.com/wp-content/uploads/2014/03/baby-elephant-and-egrets.jpg',
             lat: Math.floor(Math.random()*10),
             lng: Math.floor(Math.random()*10)
           });
@@ -98,15 +97,19 @@
         color: 'red',
         subCategories: [{
           category: 'Athletic',
-          venues: makeRandomVenues(10)
+          icon: 'assets/acc-ceremonies.svg',
+          venues: makeRandomVenues(10) // <-- Insert the venues for this subCategory here as an array (e.g. [{name: 'Golf', lat: 10, lng: 11, description: 'Test'}])
         }, {
           category: 'Archery',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(10)
         }, {
           category: 'Badminton',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(10)
         }, {
           category: 'Basketball',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(10)
         }]
       }, {
@@ -114,15 +117,19 @@
         color: 'blue',
         subCategories: [{
           category: 'Athletic 2',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(3)
         }, {
           category: 'Archery 2',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(4)
         }, {
           category: 'Badminton 2',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(7)
         }, {
           category: 'Basketball 2',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(1)
         }]
       }, {
@@ -130,12 +137,15 @@
         color: 'yellow',
         subCategories: [{
           category: 'Athletic 3',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(3)
         }, {
           category: 'Archery 3',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(4)
         }, {
           category: 'Badminton 3',
+          icon: 'assets/acc-ceremonies.svg',
           venues: makeRandomVenues(7)
         }, {
           category: 'Basketball 3',
